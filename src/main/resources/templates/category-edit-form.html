@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar categoría</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+    <link href="CSS/styles.css" rel="stylesheet">
+</head>
+<body class="container mt-4">
+    <nav id="navBar" class="navbar navbar-expand-lg navbar-custom">
+        <div class="container">
+            <!-- Logo/Brand -->
+            <a class="navbar-brand" href="#">
+                <img src="/IMG/booklogo.png" alt="Logo" class="d-inline-block align-text-top">
+            </a>
+            
+            <!-- Toggle button para móvil -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <!-- Navegación -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <!-- Inicio -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/home" aria-current="page">
+                            <img src="/IMG/home.png" alt="Inicio">
+                            <span>Inicio</span>
+                        </a>
+                    </li>
+                    
+                    <!-- Libros -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/books" aria-current="page">
+                            <img src="/IMG/bookC.png" alt="Libros">
+                            <span>Libros</span>
+                        </a>
+                    </li>
+                    
+                    <!-- Leyendo -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/lectures">
+                            <img src="/IMG/booklogo.png" alt="Leyendo">
+                            <span>Leyendo</span>
+                        </a>
+                    </li>
+                    
+                    <!-- Leídos -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/lectures">
+                            <img src="/IMG/read.png" alt="Leídos">
+                            <span>Leídos</span>
+                        </a>
+                    </li>
+                    
+                    <!-- Ajustes (Dropdown) -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="ajustesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="/IMG/ajuste.png️" alt="Ajustes">
+                            <span>Ajustes</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="ajustesDropdown">
+                            <li><a class="dropdown-item" href="/config">Configuración</a></li>
+                            <li><a class="dropdown-item" href="/logout">Cerrar Sesión</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <h2>Editar categoría</h2>
+    <form method="post" th:action="@{/categories/update}">
+        <input type="hidden" th:field="${category.id}" />
+
+        <div class="mb-3">
+            <label for="categoryName" class="form-label">Nombre de la categoría</label>
+            <input type="text" class="form-control" id="categoryName" th:field="${category.name}" required />
+            <small class="text-muted">Modifica el nombre de la categoría.</small>
+        </div>
+
+        <div class="mb-3">
+            <label for="categoryDescription" class="form-label">Descripción (opcional)</label>
+            <textarea class="form-control" id="categoryDescription" th:field="${category.desc}" rows="3"></textarea>
+            <small class="text-muted">Actualiza la descripción de la categoría.</small>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+        <a th:href="@{/home}" class="btn btn-secondary">Cancelar</a>
+    </form>
+    <footer class="bg-light py-4 mt-5">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-12 mb-3">
+                    <p class="mb-1">&copy; 2025 Lecturas Online. Todos los derechos reservados.</p>
+                    <p class="mb-1">Descubre nuevas historias cada día</p>
+                </div>
+                <div class="col-12">
+                    <a href="/logout" class="text-decoration-none text-primary">Cerrar sesión</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" 
+            crossorigin="anonymous">
+    </script>
+</body>
+</html>

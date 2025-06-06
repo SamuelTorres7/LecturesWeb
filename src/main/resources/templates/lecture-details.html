@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalles de Lectura</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+    <link href="CSS/styles.css" rel="stylesheet">
+
+</head>
+<body class="bg-light">
+
+<div class="container py-5">
+    <nav id="navBar" class="navbar navbar-expand-lg navbar-custom">
+        <div class="container">
+            <!-- Logo/Brand -->
+            <a class="navbar-brand" href="#">
+                <img src="/IMG/booklogo.png" alt="Logo" class="d-inline-block align-text-top">
+            </a>
+            
+            <!-- Toggle button para móvil -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <!-- Navegación -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <!-- Inicio -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/home" aria-current="page">
+                            <img src="/IMG/home.png" alt="Inicio">
+                            <span>Inicio</span>
+                        </a>
+                    </li>
+                    
+                    <!-- Libros -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/books" aria-current="page">
+                            <img src="/IMG/bookC.png" alt="Libros">
+                            <span>Libros</span>
+                        </a>
+                    </li>
+                    
+                    <!-- Leyendo -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/lectures">
+                            <img src="/IMG/booklogo.png" alt="Leyendo">
+                            <span>Leyendo</span>
+                        </a>
+                    </li>
+                    
+                    <!-- Leídos -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/lectures">
+                            <img src="/IMG/read.png" alt="Leídos">
+                            <span>Leídos</span>
+                        </a>
+                    </li>
+                    
+                    <!-- Ajustes (Dropdown) -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="ajustesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="/IMG/ajuste.png️" alt="Ajustes">
+                            <span>Ajustes</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="ajustesDropdown">
+                            <li><a class="dropdown-item" href="/config">Configuración</a></li>
+                            <li><a class="dropdown-item" href="/logout">Cerrar Sesión</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white text-center">
+            <h2>Detalles de tu Lectura</h2>
+        </div>
+
+        <div class="card-body">
+            <!-- Información del libro -->
+            <div class="row mb-4">
+                <div class="col-md-4 text-center">
+                    <img th:src="${lecture.book.imgUrl}" 
+                         th:alt="${lecture.book.title}" 
+                         class="img-fluid rounded"
+                         style="max-height: 300px; object-fit: cover;">
+                </div>
+                <div class="col-md-8">
+                    <h4 th:text="${lecture.book.title}">Título del Libro</h4>
+                    <p><strong>ISBN:</strong> <span th:text="${lecture.book.isbn}">ISBN</span></p>
+                    <p th:text="${lecture.book.desc}">Descripción del libro...</p>
+                </div>
+            </div>
+
+            <!-- Autores -->
+            <div class="mb-4">
+                <h5>Autores</h5>
+                <ul class="list-group">
+                    <li class="list-group-item" 
+                        th:each="author : ${authors}" 
+                        th:text="${author.name + ' ' + author.lastname}">
+                        Nombre del Autor
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Detalles de lectura -->
+            <div class="mb-4">
+                <h5>Detalles de tu Lectura</h5>
+                <ul class="list-group">
+                    <li class="list-group-item"><strong>Páginas leídas:</strong> <span th:text="${lecture.readPages}">100</span></li>
+                    <li class="list-group-item"><strong>Estado:</strong> <span th:text="${lecture.status}">En progreso</span></li>
+                    <li class="list-group-item"><strong>Fecha de inicio:</strong> <span th:text="${lecture.dateStart}">2025-04-01</span></li>
+                    <li th:if="${lecture.dateEnd != null}" class="list-group-item"><strong>Fecha de finalización:</strong> <span th:text="${lecture.dateEnd}">Pendiente</span></li>
+                </ul>
+            </div>
+
+            <!-- Botones de acción -->
+            <div class="d-flex justify-content-between mt-4">
+                <a th:href="@{'/lectures/edit/' + ${lecture.id}}" class="btn btn-warning">Editar Lectura</a>
+                <a th:href="@{'/lectures/delete/' + ${lecture.id}}" 
+                   class="btn btn-danger" 
+                   onclick="return confirm('¿Seguro que deseas eliminar esta lectura?')">Eliminar</a>
+                <a th:href="@{'/lectures?userId=' + ${lecture.user.usId}}" class="btn btn-secondary">Volver</a>
+            </div>
+        </div>
+    </div>
+</div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" 
+            crossorigin="anonymous">
+    </script>
+</body>
+</html>

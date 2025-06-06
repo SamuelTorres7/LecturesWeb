@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+    <link href="/CSS/styles.css" rel="stylesheet">
+    <title>Configuración de LectureWeb</title>
+</head>
+<body class="main-container">
+    <script src="/JS/script.js"></script>
+    <div th:if="${info != null}" class="alert alert-info alert-dismissible fade show mt-5" role="alert">
+        <span th:text="${info}">Mensaje de información.</span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <nav id="navBar" class="navbar navbar-expand-lg navbar-custom">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="/IMG/booklogo.png" alt="Logo" class="d-inline-block align-text-top">
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/home" aria-current="page">
+                            <img src="/IMG/home.png" alt="Inicio">
+                            <span>Inicio</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/books" aria-current="page">
+                            <img src="/IMG/bookC.png" alt="Libros">
+                            <span>Libros</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/lectures">
+                            <img src="/IMG/booklogo.png" alt="Leyendo">
+                            <span>Leyendo</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/lectures">
+                            <img src="/IMG/read.png" alt="Leídos">
+                            <span>Leídos</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" id="ajustesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="/IMG/ajuste.png" alt="Ajustes">
+                            <span>Ajustes</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="ajustesDropdown">
+                            <li><a class="dropdown-item active" href="/config">Configuración</a></li>
+                            <li><a class="dropdown-item" href="/logout">Cerrar Sesión</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="col-md light-background p-4 rounded shadow-sm mb-4">
+            <header class="h-container text-center">
+                <h1 class="display-4 mb-3" style="color: #5a5a5a;">Panel de Configuración</h1>
+                <p class="lead" style="color: #6c6c6c;">Gestiona los datos de tu aplicación.</p>
+            </header>
+        </div>
+
+        <section class="config-options mb-5">
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm border-0">
+                        <div class="card-body text-center d-flex flex-column justify-content-center">
+                            <h3 class="card-title mb-3">Gestión de Categorías</h3>
+                            <p class="card-text text-muted mb-4">Añade, edita o elimina las categorías de libros.</p>
+                            <a th:href="@{/categories}" class="btn btn-primary btn-lg mt-auto">
+                                <i class="bi bi-list-ul me-2"></i> Listar Categorías
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm border-0">
+                        <div class="card-body text-center d-flex flex-column justify-content-center">
+                            <h3 class="card-title mb-3">Gestión de Autores</h3>
+                            <p class="card-text text-muted mb-4">Añade, edita o elimina los autores de libros.</p>
+                            <a th:href="@{/authors}" class="btn btn-success btn-lg mt-auto">
+                                <i class="bi bi-person-fill me-2"></i> Listar Autores
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                </div>
+        </section>
+    </div>
+
+    <footer class="bg-light py-4 mt-auto">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-12 mb-3">
+                    <p class="mb-1">&copy; 2025 Lecturas Online. Todos los derechos reservados.</p>
+                    <p class="mb-1">Descubre nuevas historias cada día</p>
+                </div>
+                <div class="col-12">
+                    <a href="/logout" class="text-decoration-none text-primary">Cerrar sesión</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous">
+    </script>
+</body>
+</html>

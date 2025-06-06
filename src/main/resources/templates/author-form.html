@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Añadir Nuevo Autor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+    <link href="CSS/styles.css" rel="stylesheet">
+</head>
+<body class="container mt-4">
+    <h2>Añadir Nuevo Autor</h2>
+    <form method="post" th:action="@{/author/save}" th:object="${author}">
+        <div class="mb-3">
+            <label for="authorName" class="form-label">Nombre del Autor</label>
+            <input type="text" class="form-control" id="authorName" th:field="${author.name}" required />
+            <small class="text-muted">Introduce el nombre del autor.</small>
+        </div>
+
+        <div class="mb-3">
+            <label for="authorLastName" class="form-label">Apellido del Autor</label>
+            <input type="text" class="form-control" id="authorLastName" th:field="${author.lastname}" required />
+            <small class="text-muted">Introduce el apellido del autor.</small>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Guardar Autor</button>
+        <a th:href="@{/authors}" class="btn btn-secondary">Cancelar</a>
+    </form>
+    <footer class="bg-light py-4 mt-5">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-12 mb-3">
+                    <p class="mb-1">&copy; 2025 Lecturas Online. Todos los derechos reservados.</p>
+                    <p class="mb-1">Descubre nuevas historias cada día</p>
+                </div>
+                <div class="col-12">
+                    <a href="/logout" class="text-decoration-none text-primary">Cerrar sesión</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" 
+            crossorigin="anonymous">
+    </script>
+</body>
+</html>

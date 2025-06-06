@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/CSS/styles.css" rel="stylesheet">
+    <title>Agregar Nuevo Libro</title>
+</head>
+<body>
+    <nav id="navBar" class="navbar navbar-expand-lg navbar-custom">
+        <div class="container">
+            <!-- Logo/Brand -->
+            <a class="navbar-brand" href="#">
+                <img src="/IMG/booklogo.png" alt="Logo" class="d-inline-block align-text-top">
+            </a>
+            
+            <!-- Toggle button para móvil -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <!-- Navegación -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <!-- Inicio -->
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/home" aria-current="page">
+                            <img src="/IMG/home.png" alt="Inicio">
+                            <span>Inicio</span>
+                        </a>
+                    </li>
+                    
+                    <!-- Libros -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/books" aria-current="page">
+                            <img src="/IMG/bookC.png" alt="Libros">
+                            <span>Libros</span>
+                        </a>
+                    </li>
+                    
+                    <!-- Leyendo -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/lectures">
+                            <img src="/IMG/booklogo.png" alt="Leyendo">
+                            <span>Leyendo</span>
+                        </a>
+                    </li>
+                    
+                    <!-- Leídos -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/lectures">
+                            <img src="/IMG/read.png" alt="Leídos">
+                            <span>Leídos</span>
+                        </a>
+                    </li>
+                    
+                    <!-- Ajustes (Dropdown) -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="ajustesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="/IMG/ajuste.png️" alt="Ajustes">
+                            <span>Ajustes</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="ajustesDropdown">
+                            <li><a class="dropdown-item" href="/config">Configuración</a></li>
+                            <li><a class="dropdown-item" href="/logout">Cerrar Sesión</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="text-center">Editar Libro</h2>
+                    </div>
+                    <div class="card-body">
+                        <form th:action="@{/books/edit}" method="post">
+                            <!-- Información del Libro -->
+                            <h4 class="mb-3">Información del Libro</h4>
+                            
+                            <div class="mb-3">
+                                <label for="isbn" class="form-label">ISBN</label>
+                                <input type="text" class="form-control" th:value="${book.isbn}" id="isbn" name="isbn" required readonly>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="title" class="form-label">Título</label>
+                                <input type="text" class="form-control" th:value="${book.title}" id="title" name="title" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="pages" class="form-label">Número de Páginas</label>
+                                <input type="number" class="form-control" th:value="${book.pages}" id="pages" name="pages" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="category" class="form-label">Categoría</label>
+                                <select class="form-select" id="category" name="category" required>
+                                    <option th:each="categoria : ${categorias}" th:text="${categoria.name}"
+                                            th:value="${categoria.id}"
+                                            th:selected="${categoria.id == book.category.id}">Selecciona una categoría</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="description" class="form-label">Descripción</label>
+                                <textarea class="form-control" th:text="${book.desc}" id="description" name="description" rows="3" required></textarea>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="imageUrl" class="form-label">URL de la Imagen</label>
+                                <input type="url" class="form-control" th:value="${book.imgUrl}" id="imageUrl" name="imageUrl" required>
+                            </div>
+                            
+                            <!-- Información del Autor -->
+                            <h4 class="mb-3 mt-4">Información del Autor</h4>
+                            
+                            <div class="row">
+                                <div class="mb-3">
+                                    <label for="author" class="form-label">Autor</label>
+                                    <select class="form-select" id="author" name="author" required>
+                                        <option th:each="author : ${authors}" th:text="${author.name + ' ' + author.lastname}"
+                                                th:value="${author.id}"
+                                                th:selected="${author.id == bAuthor.id}">Opción</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                                <button type="button" class="btn btn-secondary me-md-2" onclick="window.history.back()">Cancelar</button>
+                                <button type="submit" class="btn btn-primary">Editar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" 
+            crossorigin="anonymous">
+    </script>
+</body>
+</html>

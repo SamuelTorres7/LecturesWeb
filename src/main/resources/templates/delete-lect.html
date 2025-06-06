@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmar Eliminación</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="CSS/styles.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2>Confirmar Eliminación</h2>
+    <div class="alert alert-warning" role="alert">
+        <h4 class="alert-heading">¿Está seguro de que desea eliminar este elemento?</h4>
+        <p><strong>Título del libro:</strong> <span th:text="${lecture.book.title}">Título del libro</span></p>
+        <p><strong>Estado de la lectura:</strong> <span th:text="${lecture.status}">Estado de la lectura</span></p>
+        <hr>
+        <p class="mb-0">Esta acción no se puede deshacer.</p>
+    </div>
+    <div class="d-flex justify-content-between">
+        <a href="@{/lectures}" class="btn btn-secondary">Cancelar</a>
+        <a th:href="@{/lectures/delete/{id}(id=${lecture.id})}" class="btn btn-danger">
+            Eliminar
+        </a>
+
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" 
+        crossorigin="anonymous"></script>
+</body>
+</html>
